@@ -3,12 +3,13 @@
     
     <body>
         <form>
-            Size: <input type="number" id="sz" value="8"> <br/>
-            Mines: <input type="number" id="mns" value="10"> <br/>
+            Size: <input type="number" id="sz" value="8" onchange="setmm()"> <br/>
+            Mines: <input type="number" id="mns" value="10"> max = (size-1)^2 = <span id="mm">49</span><br/>
             <input type="button" id="btn" value="Start!" onclick="start()"> <br/>
         </form>
-        P: <span id="p"></span><br/>
-        Clicks: <span id="clk"></span><br/>
+        Flags: <span id="f"></span> (right-click) <br/>
+        Clicks: <span id="clk"></span> (left-click) <br/>
+        <p id="info"></p>
         <table id="tbl"></table>
     </body>
     
@@ -20,6 +21,10 @@
                 A[i].fill(def);
             }
             return A;
+        }
+        
+        function setmm(){
+            document.getElementById("mm").innerHTML=Math.pow(parseInt(document.getElementById("sz").value)-1,2);
         }
         
         function t(x,y){return T.rows[x].cells[y]}
@@ -45,9 +50,9 @@
 	        
             p=multArray(n,n,0);
 			
-            pc=0;
-            PC=document.getElementById("p");
-            PC.innerHTML=pc+"/"+MINES;
+            fc=0;
+            FC=document.getElementById("f");
+            FC.innerHTML=fc+"/"+MINES;
             
             cl=0;
             CL=document.getElementById("clk");
@@ -55,7 +60,9 @@
             
             T=document.getElementById("tbl");
             T.innerHTML="";
-
+            
+            document.getElementById("info").innerHTML="";
+            
             while(cnt<MINES){
 				a = Math.floor(Math.random()*n);
 				b = Math.floor(Math.random()*n);
@@ -81,7 +88,9 @@
                     
 	                c.onclick=function(){
 	                    if(p[this.parentElement.rowIndex][this.cellIndex]==-1){
-	                        alert("nope");
+	                        document.getElementById("info").innerHTML="xDDDDDDDDDDDDDDDDDDDD";
+                            T.style.backgroundColor="red";
+                            T.style
 	                        this.innerHTML="*";
                             for(g=0; g<n; g++){
                                 for(h=0; h<n; h++){
@@ -104,14 +113,18 @@
                     }
 	                c.oncontextmenu=function(){
                         if(this.innerHTML==""){
-                            this.innerHTML="P";
-                            pc++;
-                            PC.innerHTML=pc+"/"+MINES;
+                            this.innerHTML="F";
+                            fc++;
+                            FC.innerHTML=fc+"/"+MINES;
+                            if(fc==MINES){
+                                document.getElementById("info").innerHTML="bravo!";
+                                T.style.backgroundColor="green";
+                            }
                         }
-                        else if(this.innerHTML=="P"){
+                        else if(this.innerHTML=="F"){
                             this.innerHTML="";
-                            pc--;
-                            PC.innerHTML=pc;
+                            fc--;
+                            FC.innerHTML=fc;
                             
                         }
                     }
