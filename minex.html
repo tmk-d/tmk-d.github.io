@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    
+    <body>
+        <form>
+            Size: <input type="number" id="sz" value="8"> <br/>
+            Mines: <input type="number" id="mns" value="10"> <br/>
+            <input type="button" id="btn" value="Start!" onclick="start()"> <br/>
+        </form>
+        P: <span id="p"></span><br/>
+        Clicks: <span id="clk"></span><br/>
+        <table id="tbl"></table>
+    </body>
+    
+    <script>
+        function multArray(rows, cols, def){
+            A = new Array(rows);
+            for(i=0; i<rows; i++){
+                A[i] = new Array(cols);
+                A[i].fill(def);
+            }
+            return A;
+        }
+        
+        function t(x,y){return T.rows[x].cells[y]}
+
+		function color(a,b, onof){
+			for(i of [-1,0,1]){
+				for(j of [-1,0,1]){
+					var x=a+i;
+					var y=b+j;
+			    if (!(i==0 && j==0) && 0<=x && x<n && 0<=y && y<n)
+						t(x,y).style.backgroundColor = (onof) ? "yellow" : "";
+				}
+			}
+		}
+        
+
+        	        
+        function start(){			
+            cnt=0
+	        
+            n = parseInt(document.getElementById("sz").value);
+	        MINES = parseInt(document.getElementById("mns").value);
+	        
+            p=multArray(n,n,0);
+			
+            pc=0;
+            PC=document.getElementById("p");
+            PC.innerHTML=pc+"/"+MINES;
+            
+            cl=0;
+            CL=document.getElementById("clk");
+	        CL.innerHTML=cl;
+            
+            T=document.getElementById("tbl");
+            T.innerHTML="";
+
+            while(cnt<MINES){
+				a = Math.floor(Math.random()*n);
+				b = Math.floor(Math.random()*n);
+				if(p[a][b]!=-1){
+				    p[a][b]=-1;
+				    for(i of [-1,0,1]){
+					   for(j of [-1,0,1]){
+							var x=a+i;
+							var y=b+j;
+							if (!(i==0 && j==0) && 0<=x && x<n && 0<=y && y<n && p[x][y]!=-1)
+								p[x][y]++;
+					   }
+				    }
+					cnt++;
+				}
+			}
+            
+	        for(i=0; i<n; i++){
+	            var r = T.insertRow(i);
+	            for(j=0; j<n; j++){
+	                var c = r.insertCell(j);
+	                //c.innerHTML=0;
+                    
+	                c.onclick=function(){
+	                    if(p[this.parentElement.rowIndex][this.cellIndex]==-1){
+	                        alert("nope");
+	                        this.innerHTML="*";
+                            for(g=0; g<n; g++){
+                                for(h=0; h<n; h++){
+                                    t(g,h).innerHTML= (p[g][h]==-1) ? "*" : p[g][h] ;
+                                }
+                            }
+	                    }
+	                    else if (this.innerHTML==""){
+                            this.innerHTML=p[this.parentElement.rowIndex][this.cellIndex];
+                            //this.style.color="hsl(240, 100%, "+10*val+"%)";
+                            cl++;
+                            CL.innerHTML=cl;
+                        }
+                    };
+	                c.onmouseenter=function(){
+                        color(this.parentElement.rowIndex, this.cellIndex, 1)
+                    }
+	                c.onmouseleave=function(){
+                        color(this.parentElement.rowIndex, this.cellIndex, 0)
+                    }
+	                c.oncontextmenu=function(){
+                        if(this.innerHTML==""){
+                            this.innerHTML="P";
+                            pc++;
+                            PC.innerHTML=pc+"/"+MINES;
+                        }
+                        else if(this.innerHTML=="P"){
+                            this.innerHTML="";
+                            pc--;
+                            PC.innerHTML=pc;
+                            
+                        }
+                    }
+	            }
+	        }
+	    }
+    </script>
+    
+    <style>
+        td {
+            border: 1px solid;
+            width: 1.5em;
+            height: 1.5em;
+            text-align: center;
+        }
+        body {
+            font-family: sans-serif;
+        }
+        table {
+            font-size: 1.5em;
+        }
+    </style>
+</html>
