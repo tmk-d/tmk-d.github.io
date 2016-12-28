@@ -60,7 +60,7 @@
             
             T=document.getElementById("tbl");
             T.innerHTML="";
-            
+            T.style.backgroundColor="";
             document.getElementById("info").innerHTML="";
             
             while(cnt<MINES){
@@ -90,7 +90,6 @@
 	                    if(p[this.parentElement.rowIndex][this.cellIndex]==-1){
 	                        document.getElementById("info").innerHTML="xDDDDDDDDDDDDDDDDDDDD";
                             T.style.backgroundColor="red";
-                            T.style
 	                        this.innerHTML="*";
                             for(g=0; g<n; g++){
                                 for(h=0; h<n; h++){
