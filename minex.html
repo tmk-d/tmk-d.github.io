@@ -43,12 +43,14 @@ function printarray(arr){
 
     function color(a, b, onof) {
         for (i of [-1, 0, 1]) {
+          var x = a + i;
+          if(0 <= x && x < n){
             for (j of [-1, 0, 1]) {
-                var x = a + i;
                 var y = b + j;
-                if (!(i == 0 && j == 0) && 0 <= x && x < n && 0 <= y && y < n)
+                if (!(i == 0 && j == 0) && 0 <= y && y < n)
                     t(x, y).style.backgroundColor = (onof) ? "yellow" : "";
             }
+          }
         }
     }
 
@@ -57,15 +59,17 @@ function printarray(arr){
       shown++;
       p[a][b]=-2;
       for (i of [-1,0,1]) {
-        for (j of [-1,0,1]) {
-          var x = a + i;
-          var y = b + j;
-          if (!(i == 0 && j == 0) && 0 <= x && x < n && 0 <= y && y < n){
-            if(p[x][y]==0)
-              findIsland(x,y);
-            else if(p[x][y]!=-2 && t(x,y).innerHTML==""){
-              t(x,y).innerHTML=p[x][y];
-              shown++;
+        var x = a + i;
+        if(0 <= x && x < n){
+          for (j of [-1,0,1]) {
+            var y = b + j;
+            if (!(i == 0 && j == 0) && 0 <= y && y < n){
+              if(p[x][y]==0)
+                findIsland(x,y);
+              else if(p[x][y]!=-2 && t(x,y).innerHTML==""){
+                t(x,y).innerHTML=p[x][y];
+                shown++;
+              }
             }
           }
         }
@@ -106,7 +110,7 @@ function printarray(arr){
                         this.innerHTML = "*";
                         for (g = 0; g < n; g++) {
                             for (h = 0; h < n; h++) {
-                                t(g, h).innerHTML = (p[g][h] == -1) ? "*" : p[g][h];
+                                t(g, h).innerHTML = (p[g][h] == -1) ? "*" : ( (p[g][h] == -2) ? 0 : p[g][h]);
                             }
                         }
                     }
@@ -120,12 +124,14 @@ function printarray(arr){
                                 if (a != v1 && b != v2 && p[a][b] != -1) {
                                     p[a][b] = -1;
                                     for (i of [-1, 0, 1]) {
+                                      var x = a + i;
+                                      if(0 <= x && x < n){
                                         for (j of [-1, 0, 1]) {
-                                            var x = a + i;
                                             var y = b + j;
-                                            if (!(i == 0 && j == 0) && 0 <= x && x < n && 0 <= y && y < n && p[x][y] != -1)
+                                            if (!(i == 0 && j == 0) && 0 <= y && y < n && p[x][y] != -1)
                                                 p[x][y]++;
                                         }
+                                      }
                                     }
                                     cnt++;
                                 }
