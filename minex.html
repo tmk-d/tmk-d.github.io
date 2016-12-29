@@ -63,29 +63,10 @@
             T.style.backgroundColor="";
             document.getElementById("info").innerHTML="";
             
-            while(cnt<MINES){
-				a = Math.floor(Math.random()*n);
-				b = Math.floor(Math.random()*n);
-				if(p[a][b]!=-1){
-				    p[a][b]=-1;
-				    for(i of [-1,0,1]){
-					   for(j of [-1,0,1]){
-							var x=a+i;
-							var y=b+j;
-							if (!(i==0 && j==0) && 0<=x && x<n && 0<=y && y<n && p[x][y]!=-1)
-								p[x][y]++;
-					   }
-				    }
-					cnt++;
-				}
-			}
-            
 	        for(i=0; i<n; i++){
 	            var r = T.insertRow(i);
 	            for(j=0; j<n; j++){
 	                var c = r.insertCell(j);
-	                //c.innerHTML=0;
-                    
 	                c.onclick=function(){
 	                    if(p[this.parentElement.rowIndex][this.cellIndex]==-1){
 	                        document.getElementById("info").innerHTML="xDDDDDDDDDDDDDDDDDDDD";
@@ -98,10 +79,33 @@
                             }
 	                    }
 	                    else if (this.innerHTML==""){
+                            if(cl==0){
+                                v1=this.parentElement.rowIndex;
+                                v2=this.cellIndex;
+					            while(cnt<MINES){
+									a = Math.floor(Math.random()*n);
+									b = Math.floor(Math.random()*n);
+									if(a!=v1 && b!=v2 && p[a][b]!=-1){
+									    p[a][b]=-1;
+									    for(i of [-1,0,1]){
+										   for(j of [-1,0,1]){
+												var x=a+i;
+												var y=b+j;
+												if (!(i==0 && j==0) && 0<=x && x<n && 0<=y && y<n && p[x][y]!=-1)
+													p[x][y]++;
+										   }
+									    }
+										cnt++;
+									}
+								}
+							}
                             this.innerHTML=p[this.parentElement.rowIndex][this.cellIndex];
-                            //this.style.color="hsl(240, 100%, "+10*val+"%)";
                             cl++;
                             CL.innerHTML=cl;
+                            if(cl==n*n-MINES){
+                                document.getElementById("info").innerHTML="bravo!";
+                                T.style.backgroundColor="green";
+                            }
                         }
                     };
 	                c.onmouseenter=function(){
@@ -115,20 +119,16 @@
                             this.innerHTML="F";
                             fc++;
                             FC.innerHTML=fc+"/"+MINES;
-                            if(fc==MINES){
-                                document.getElementById("info").innerHTML="bravo!";
-                                T.style.backgroundColor="green";
-                            }
                         }
                         else if(this.innerHTML=="F"){
                             this.innerHTML="";
                             fc--;
                             FC.innerHTML=fc;
-                            
                         }
                     }
 	            }
 	        }
+            
 	    }
     </script>
     
