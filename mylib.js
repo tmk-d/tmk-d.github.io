@@ -18,3 +18,20 @@ function multArray(rows, cols, def){
         }
     return A;
     }
+
+    function findIsland(a, b) {
+      t(a,b).innerHTML=0;
+      p[a][b]=-2;
+      for (i of [-1,0,1]) {
+        for (j of [-1,0,1]) {
+          var x = a + i;
+          var y = b + j;
+          if (!(i == 0 && j == 0) && 0 <= x && x < n && 0 <= y && y < n){
+            if(p[x][y]==0)
+              findIsland(x,y);
+            else if(p[x][y]!=-1)
+              t(x,y).innerHTML=p[x][y];
+          }
+        }
+      }
+    }
