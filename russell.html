@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<script>
+function colr(i)
+{
+  T=document.getElementsByClassName(i);
+  for(j=0; j<T.length; j++)
+    T[j].style.color="blue";
+}
+
+function ucolr(i)
+{
+  T=document.getElementsByClassName(i);
+  for(j=0; j<T.length; j++)
+    T[j].style.color="black";
+}
+
+
+function init()
+{
+  for(i=1; i<10; i++){
+    T=document.getElementsByClassName(i);
+    for(j=0; j<T.length; j++){
+      T[j].onmouseenter=function(){colr(this.className)};
+      T[j].onmouseleave=function(){ucolr(this.className)};
+    }
+  }
+}
+</script>
+
+<body onload="init()">
+
+<p style="text-align:center; font-size:larger;"><span class=1>∃x∈L</span> { <span class=2>K(x)</span> <span class=3>∧</span> <span class=4>Ł(x)</span> <span class=5>∧</span> <span class=6>∀y∈L</span> [ <span class=7>K(y)</span> <span class=8>⇒</span> <span class=9>(y=x)</span> ]}</p>
+</br>
+
+<span class=1>Dla każdego x będącego człowiekiem:</span>
+<ol type="1">
+  <li><span class=2>x jest obecnym królem Francji</span> <span class=3>i</span>,</li>
+  <li><span class=4>x jest łyse</span> <span class=5>i,</span></li>
+  <li>
+    <span class=6>dla każdego człowieka y:</span>
+    <span class=8>jeśli</span> <span class=7>y jest królem</span>, <span class=8>to</span> <span class=9>y jest x-em.</span></table>
+  </li>
+</ol>
+
+</body>
+</html>
