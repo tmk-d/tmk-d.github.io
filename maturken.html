@@ -1,0 +1,78 @@
+<html>
+<style>
+.divTable{
+	display: table;
+}
+.divTableRow {
+	display: table-row;
+}
+.divTableCell, .divTableHead {
+	border: 1px solid #999999;
+	display: table-cell;
+	padding: 3px 10px;
+}
+.divTableBody {
+	display: table-row-group;
+}
+output {
+  font-weight: bold;
+}
+</style>
+
+<body>
+  <div class="divTable" style="border: 1px solid #000;">
+  	<div class="divTableBody" oninput="suma.value=round(parseFloat(punktyP.value)+parseFloat(punktyM.value)+parseFloat(punktyO.value)+parseFloat(punktyR.value),2)">
+  		<div class="divTableRow" style="background-color: #EEE;">
+  			<div class="divTableCell">Przedmiot</div>
+  			<div class="divTableCell">Waga</div>
+  			<div class="divTableCell">Poziom</div>
+  			<div class="divTableCell">Wynik</div>
+  			<div class="divTableCell">Punkty</div>
+  		</div>
+      <div class="divTableRow" oninput="punktyP.value=round(parseFloat(wynikP.value)*parseFloat(poziomP.value)*parseFloat(wagaP.value)/100,2)">
+  			<div class="divTableCell">Język polski</div>
+  			<div class="divTableCell"><input type="number" id="wagaP" min="1" max="100" value="40"> %</div>
+  			<div class="divTableCell"><input type="number" id="poziomP" min="0" max="1" step="0.1" value="0.6"></div>
+  			<div class="divTableCell"><input type="number" id="wynikP" min="1" max="100" value="75">%</div>
+  			<div class="divTableCell"><output id="punktyP" for="wagaP poziomP wynikP" >18</output></div>
+  		</div>
+      <div class="divTableRow" oninput="punktyM.value=round(parseFloat(wynikM.value)*parseFloat(poziomM.value)*parseFloat(wagaM.value)/100,2)">
+  			<div class="divTableCell">Matematyka</div>
+  			<div class="divTableCell"><input type="number" id="wagaM" min="1" max="100" value="10"> %</div>
+  			<div class="divTableCell"><input type="number" id="poziomM" min="0" max="1" step="0.1" value="0.6"></div>
+  			<div class="divTableCell"><input type="number" id="wynikM" min="1" max="100" value="75">%</div>
+  			<div class="divTableCell"><output id="punktyM" for="wagaM poziomM wynikM">4.5</output></div>
+  		</div>
+      <div class="divTableRow" oninput="punktyO.value=round(parseFloat(wynikO.value)*parseFloat(poziomO.value)*parseFloat(wagaO.value)/100,2)">
+  			<div class="divTableCell">Język obcy</div>
+  			<div class="divTableCell"><input type="number" id="wagaO" min="1" max="100" value="15"> %</div>
+  			<div class="divTableCell"><input type="number" id="poziomO" min="0" max="1" step="0.1" value="0.6"></div>
+  			<div class="divTableCell"><input type="number" id="wynikO" min="1" max="100" value="75">%</div>
+  			<div class="divTableCell"><output id="punktyO" for="wagaO poziomO wynikO">4.5</output></div>
+  		</div>
+      <div class="divTableRow" oninput="punktyR.value=round(parseFloat(wynikR.value)*parseFloat(poziomR.value)*parseFloat(wagaR.value)/100,2)">
+  			<div class="divTableCell">Przedmiot rozszerzony</div>
+  			<div class="divTableCell"><input type="number" id="wagaR" min="1" max="100" value="35"> %</div>
+  			<div class="divTableCell"><input type="number" id="poziomR" min="0" max="1" step="0.1" value="1"></div>
+  			<div class="divTableCell"><input type="number" id="wynikR" min="1" max="100" value="100">%</div>
+  			<div class="divTableCell"><output id="punktyR" for="wagaR poziomR wynikR">35</output></div>
+  		</div>
+      <div class="divTableRow" style="background-color: #EEE;">
+  			<div class="divTableCell">Suma</div>
+  			<div class="divTableCell">100%</div>
+  			<div class="divTableCell"></div>
+  			<div class="divTableCell"></div>
+  			<div class="divTableCell"><output id="suma" for="punktyP punktyM punktyO punktyR">62</output></div>
+  		</div>
+  	</div>
+  </div>
+  </div>
+</body>
+
+<script>
+function round(value, decimals) {
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
+</script>
+
+</html>
