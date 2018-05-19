@@ -6,8 +6,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-
-
 	
 	<script src="script.js"></script> 
 
@@ -25,19 +23,22 @@
 			<li class="nav-item">
 				<a class="nav-link" data-toggle="tab" href="#baza">Baza dzieł</a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#wynik">Wynik</a>
+			</li>
 		</ul>
 
 		<div class="tab-content">
 			<div id="test" class="container tab-pane active">
 				<div class="row">
 					<div class="col" style="background-color:#17a2b8;">Ilość:<span id="ilo">0/0</span></div>
-					<div class="col" style="background-color:#20c997;">Sukcesy:<span id="suk">0/0</span></div>
+					<div class="col" style="background-color:#b816a2;">Sukcesy:<span id="suk">0/0</span></div>
 					<div class="col" style="background-color:#17a2b8;">Punkty:<span id="pkt">0/0</span></div>
 				</div>
 
 				<div class="row">
-					<div class="col-sm-12 col-md-8" style="background-color:;">
-						<img id="obr" class="img-fluid"  alt="ilustracja/reprodukcja">
+					<div class="col-sm-12 col-md-8" style="background-color:#cacccc;">
+						<img id="obr" class="img-fluid"  alt="ilustracja/reprodukcja" style="display: block;margin-left:auto;margin-right:auto;">
 					</div>			
 					<div class="col" style="background-color:#f8f9fa;">
 						<div>Tytuł: <span id="tytO" class="font-weight-bold"></div>
@@ -58,6 +59,42 @@
 				<table class="table table-striped">
 					<thead><tr> <th>Tytuł</th> <th>Autor</th> <th>Nurt</th> <th>Link</th></tr></thead>
 				</table>
+			</div>
+			
+			<div id="wynik" class="container tab-pane fade">
+				<div class="row">
+					<div class="col progress my-2">
+						<div id="wowP" class="progress-bar bg-success" style="width:0%"></div>
+						<div id="mehP" class="progress-bar bg-warning" style="width:0%"></div>
+						<div id="wtfP" class="progress-bar bg-danger" style="width:0%"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col bg-success">
+						<h3>Pełen sukces</h3>
+						<table class="table">
+							<thead><tr> <th>Tytuł</th> <th>Autor</th></tr></thead>
+							<tbody id="wowT"></tbody>
+						</table>
+					</div>
+					
+					<div class="col bg-warning">
+						<h3>Częściowo poprawne</h3>
+						<table class="table">
+							<thead><tr> <th>Tytuł</th> <th>Autor</th></tr></thead>
+							<tbody id="mehT"></tbody>
+						</table>
+					</div>
+					
+					<div class="col bg-danger">
+						<h3>Całkowicie błędne</h3>
+						<table class="table">
+							<thead><tr> <th>Tytuł</th> <th>Autor</th></tr></thead>
+							<tbody id="wtfT"></tbody>
+						</table>
+					</div>
+				</div>
+				
 			</div>
 			
 		</div>

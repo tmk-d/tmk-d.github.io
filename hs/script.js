@@ -59,8 +59,24 @@ function singlecheck(o, i){
 		}
 	
 	}
+
+function maketr(a, b, tab){
+	var tr = document.createElement("tr");
 	
+	var td = document.createElement("td");
+	td.innerHTML=a;
+	tr.appendChild(td);
+	
+	td = document.createElement("td");
+	td.innerHTML=b;
+	tr.appendChild(td);
+	
+	tab.appendChild(tr);
+}
+
 function check(){
+	succtmp=0;
+	
 	tytO.textContent=T[num]["tytuł"];
 	singlecheck(tytO,tytI);
 	//T.columns["tytuł"].splice(num,1);
@@ -75,11 +91,25 @@ function check(){
 	
 	pkt.textContent=points+"/"+(3*count);
 	
-	if(succtmp==3)
+	
+	if(succtmp==3){
 		succ++;
+		maketr(T[num]["tytuł"],T[num]["autor"],wowT);
+	}
+	else if(succtmp==0)
+		maketr(T[num]["tytuł"],T[num]["autor"],wtfT);
+	else
+		maketr(T[num]["tytuł"],T[num]["autor"],mehT);
 	suk.textContent=succ+"/"+count;
 	
-	
+	wowP.innerHTML=(100*wowT.children.length/count).toFixed(2)+"%";
+	wowP.style.width=wowP.innerHTML;
+	mehP.innerHTML=(100*mehT.children.length/count).toFixed(2)+"%";
+	mehP.style.width=mehP.innerHTML;
+	wtfP.innerHTML=(100*wtfT.children.length/count).toFixed(2)+"%";
+	wtfP.style.width=wtfP.innerHTML;
+
+
 	
 	
 	btn.value="Następny";
@@ -110,6 +140,4 @@ function next(){
 	
 	count++;
 	ilo.textContent=count;
-	
-	succtmp=0;
 	}
