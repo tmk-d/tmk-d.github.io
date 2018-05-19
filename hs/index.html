@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	
+	<script src="script.js"></script> 
+
+  
+  <body onload="init1()">
+	
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col" style="background-color:lavender;">Ilość:<span id="ilo">0/0</span></div>
+			<div class="col" style="background-color:lavenderblush;">Sukcesy:<span id="suk">0/0</span></div>
+			<div class="col" style="background-color:lavender;">Punkty:<span id="pkt">0/0</span></div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 col-md-8" style="background-color:peachpuff;">
+				<img id="obr" class="img-fluid"  alt="ilustracja/reprodukcja">
+			</div>			
+			<div class="col" style="background-color:lightcyan;">
+				<div>Tytuł: <span id="tytO" class="font-weight-bold"></div>
+				<div><input type="text" class="form-control" id="tytI"></div>
+				<div>Autor: <span id="autO" class="font-weight-bold"></div>
+				<div><input type="text" class="form-control"  id="autI"></div>
+				<div>Nurt/Epoka: <span id="nurO" class="font-weight-bold"></div>
+				<div><input type="text" class="form-control" id="nurI"></div>
+				<br>
+				<input type="button" class="btn" id="btn" onclick="init2()" value="start"></input>
+			</div>
+			
+		</div>
+		
+	</div>
+
+	
+  </body>
+</html>
+
+
