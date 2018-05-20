@@ -77,29 +77,25 @@ function maketr(a, b, tab){
 function check(){
 	succtmp=0;
 	
-	tytO.textContent=T[num]["tytuł"];
+	tytO.textContent=t["tytuł"];
 	singlecheck(tytO,tytI);
-	//T.columns["tytuł"].splice(num,1);
 	
-	autO.textContent=T[num]["autor"];
+	autO.textContent=t["autor"];
 	singlecheck(autO,autI);
-	//T.columns["autor"].splice(num,1);
 	
-	nurO.textContent=T[num]["nurt"];
+	nurO.textContent=t["nurt"];
 	singlecheck(nurO,nurI);
-	//T.columns["nurt"].splice(num,1);
 	
 	pkt.textContent=points+"/"+(3*count);
 	
-	
 	if(succtmp==3){
 		succ++;
-		maketr(T[num]["tytuł"],T[num]["autor"],wowT);
+		maketr(t["tytuł"],t["autor"],wowT);
 	}
 	else if(succtmp==0)
-		maketr(T[num]["tytuł"],T[num]["autor"],wtfT);
+		maketr(t["tytuł"],t["autor"],wtfT);
 	else
-		maketr(T[num]["tytuł"],T[num]["autor"],mehT);
+		maketr(t["tytuł"],t["autor"],mehT);
 	suk.textContent=succ+"/"+count;
 	
 	wowP.innerHTML=(100*wowT.children.length/count).toFixed(2)+"%";
@@ -108,36 +104,41 @@ function check(){
 	mehP.style.width=mehP.innerHTML;
 	wtfP.innerHTML=(100*wtfT.children.length/count).toFixed(2)+"%";
 	wtfP.style.width=wtfP.innerHTML;
-
-
-	
 	
 	btn.value="Następny";
 	btn.onclick=function(){next()};
-	}
+}
 function next(){
-	//if (T.length==0)
-	//	alert("koniec");
+	if (T.length==0){
+		$("#test").removeClass("active");
+		$("#testA").removeClass("active");
+		$("#wynik").addClass("active show");
+		$("#wynikA").addClass("active show");
+		$("#koniec").removeClass("d-none");
+		}
 	
-	num=Math.floor(Math.random()*T.length);
-	obr.src=T[num]["link"];
-	//T.columns["link"].splice(num,1);
-	
-	tytO.textContent="";
-	tytI.style.backgroundColor="";
-	tytI.value="";
-	
-	autO.textContent="";
-	autI.style.backgroundColor="";
-	autI.value="";
-	
-	nurO.textContent="";
-	nurI.style.backgroundColor="";
-	nurI.value="";
-	
-	btn.value="Sprawdź";
-	btn.onclick=function(){check()};
-	
-	count++;
-	ilo.textContent=count;
+	else{
+		num=Math.floor(Math.random()*T.length);
+		t=T.splice(num,1)[0];
+		
+		obr.src=t["link"];
+		
+		tytO.textContent="";
+		tytI.style.backgroundColor="";
+		tytI.value="";
+		
+		autO.textContent="";
+		autI.style.backgroundColor="";
+		autI.value="";
+		
+		nurO.textContent="";
+		nurI.style.backgroundColor="";
+		nurI.value="";
+		
+		btn.value="Sprawdź";
+		btn.onclick=function(){check()};
+		
+		count++;
+		ilo.textContent=count;
 	}
+}
