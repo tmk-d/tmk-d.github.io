@@ -30,25 +30,26 @@
 
 		<div class="tab-content">
 			<div id="test" class="container tab-pane active">
-				<div class="row">
-					<div class="col" style="background-color:#17a2b8;">Ilość:<span id="ilo">0/0</span></div>
-					<div class="col" style="background-color:#b816a2;">Sukcesy:<span id="suk">0/0</span></div>
-					<div class="col" style="background-color:#17a2b8;">Punkty:<span id="pkt">0/0</span></div>
+				<div class="row border-bottom border-secondary">
+					<div class="col" style="background-color:#cce5ff;">Ilość: <span id="ilo">0/0</span></div>
+					<div class="col" style="background-color:#e2e3e5;">Sukcesy: <span id="suk">0/0</span></div>
+					<div class="col" style="background-color:#cce5ff;">Punkty: <span id="pkt">0/0</span></div>
 				</div>
 
 				<div class="row">
 					<div class="col-sm-12 col-md-8" style="background-color:#cacccc;">
-						<img id="obr" class="img-fluid"  alt="ilustracja/reprodukcja" style="display: block;margin-left:auto;margin-right:auto;">
+						<p id="startinfo" class="text-center display-4">Kliknij 'Start' aby rozpocząć</p>
+						<img id="obr" class="img-fluid" style="display: block;margin-left:auto;margin-right:auto;">
 					</div>			
 					<div class="col" style="background-color:#f8f9fa;">
-						<div>Tytuł: <span id="tytO" class="font-weight-bold"></div>
+						<div>Tytuł: <span id="tytO" class="font-weight-bold"></span></div>
 						<div><input type="text" class="form-control" id="tytI"></div>
 						<div>Autor: <span id="autO" class="font-weight-bold"></div>
 						<div><input type="text" class="form-control"  id="autI"></div>
 						<div>Nurt/Epoka: <span id="nurO" class="font-weight-bold"></div>
 						<div><input type="text" class="form-control" id="nurI"></div>
 						<br>
-						<input type="button" class="btn" id="btn" onclick="next()" value="Start" disabled></input>
+						<input type="button" class="btn" id="btn" onclick="next(); $('#startinfo').addClass('d-none'); $('.form-control').attr('disabled',false)" value="Start" disabled></input>
 					</div>
 					
 				</div>
@@ -56,14 +57,14 @@
 			</div>
 			
 			<div id="baza" class="container tab-pane fade">
-				<table class="table table-striped">
+				<table class="table table-striped table-responsive-md">
 					<thead><tr> <th>Tytuł</th> <th>Autor</th> <th>Nurt</th> <th>Link</th></tr></thead>
 				</table>
 			</div>
 			
-			<div id="wynik" class="container tab-pane fade my-2">
-				<div id="koniec" class="row alert alert-info d-none">
-					<strong>To już koniec!</strong> Sprawdź swoje wyniki.<br>
+			<div id="wynik" class="container tab-pane fade">
+				<div id="koniec" class="row alert alert-info d-none my-2">
+					<strong>To już koniec! </strong>Sprawdź swoje wyniki.<br>
 				</div>
 				<div class="row progress my-2">
 					<div id="wowP" class="progress-bar bg-success" style="width:0%"></div>
@@ -71,24 +72,24 @@
 					<div id="wtfP" class="progress-bar bg-danger" style="width:0%"></div>
 				</div>
 				<div class="row">
-					<div class="col bg-success">
-						<h3>Pełen sukces</h3>
+					<div class="col-xl-4 bg-success border">
+						<h3 class="my-2 text-center">Pełen sukces</h3>
 						<table class="table">
 							<thead><tr> <th>Tytuł</th> <th>Autor</th></tr></thead>
 							<tbody id="wowT"></tbody>
 						</table>
 					</div>
 					
-					<div class="col bg-warning">
-						<h3>Częściowo poprawne</h3>
+					<div class="col-xl-4 bg-warning border">
+						<h3 class="my-2 text-center">Częściowo poprawne</h3>
 						<table class="table">
 							<thead><tr> <th>Tytuł</th> <th>Autor</th></tr></thead>
 							<tbody id="mehT"></tbody>
 						</table>
 					</div>
 					
-					<div class="col bg-danger">
-						<h3>Całkowicie błędne</h3>
+					<div class="col-xl-4 bg-danger border">
+						<h3 class="my-2 text-center">Całkowicie błędne</h3>
 						<table class="table">
 							<thead><tr> <th>Tytuł</th> <th>Autor</th></tr></thead>
 							<tbody id="wtfT"></tbody>
