@@ -104,7 +104,8 @@
 	- **tożsamość oporu** – "wykluczanie wykluczających przez wykluczonych" (np. milicje na południu USA, które odrzucają rząd federalny i tworzą własne prawo; dobrze pracowała ta koncepcja w badaniu fundamentalizmu religijnego)
 
 
-> [!NOTE] Bauman — władza uwodzenia
+> [!NOTE] .
+> Bauman — władza uwodzenia
 
 
 ## Schwartz — sieci
