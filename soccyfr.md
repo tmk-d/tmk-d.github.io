@@ -103,10 +103,8 @@
 	- **tożsamość projektowa** – próbuje zbudować scenariusz innej przyszłości, alternatywną wizje społeczeństwa (np. osoby w środowiskach ekologicznych; wtedy jeszcze dziura ozonowa i zanieczyszczenia niż ocieplenie klimatu)
 	- **tożsamość oporu** – "wykluczanie wykluczających przez wykluczonych" (np. milicje na południu USA, które odrzucają rząd federalny i tworzą własne prawo; dobrze pracowała ta koncepcja w badaniu fundamentalizmu religijnego)
 
-
-> [!NOTE] Por.
+> [!NOTE]
 > Bauman - władza uwodzenia
-
 
 ## Schwartz — sieci
 - platformy stabilizują sieci, które bez nich miałyby charakter efemeryczny
