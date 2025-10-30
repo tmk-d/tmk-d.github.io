@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Basic JSON Editor Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
+    <link rel="stylesheet" id="theme-link" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div id='editor_holder'></div>
+
+    <script>
+      // Initialize the editor with a JSON schema
+
+
+      var jseditor = new JSONEditor(document.getElementById('editor_holder'),{
+        schema: {
+            "type": "object",
+            "title": "Rekord",
+            "properties": {
+                "Metryczka": {
+                    "type": "object",
+                    "format": "grid",
+                    "options": {"collapsed": true},
+                    "properties": {
+                        "ORCID": {"type": "string"},
+                        "RADON ID": {"type": "string"},
+                        "Ludzie Nauki ID":  {"type": "string"},
+                    },
+                },
+                "Imię i nazwisko (wszystkie warianty)": {
+                    "type": "object",
+                    "options": {"collapsed": true},
+                    "properties": {
+                        "Imię": {
+                            "type": "array",
+                            "format": "table",
+                            "items": {
+                                "type": "string",
+                                "title": "imię"
+                            }
+                        },
+                        "Nazwisko": {
+                            "type": "array",
+                            "format": "table",
+                            "items": {
+                                "type": "string",
+                                "title": "nazwisko"
+                            }
+                        },
+                    }
+                },
+                "Granty (kierownik)": {
+                    "type": "array",
+                    "options": {"collapsed": true},
+                    "format": "table",
+                    "items": {
+                        "type": "object",
+                        "title": "grant",
+                        "properties": {
+                            "Grantodawca": {
+                                "type": "string",
+                                "enum": [
+                                    "NCN",
+                                    "NPRH",
+                                    "ERC",
+                                    "Horizon/PR",
+                                    "Inne polskie",
+                                    "Inne zagraniczne",
+                                    "Inne międzynarodowe"
+                                ]
+                            },
+                            "Tytuł projektu": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "Funkcje": {
+                    "type": "array",
+                    "format": "table",
+                    "options": {"collapsed": true},
+                    "items": {
+                        "type": "object",
+                        "title": "funkcja",
+                        "properties": {
+                            "Nazwa funkcji": {"type": "string"},
+                            "Uczelnia": {"type": "string"},
+                            "Okres": {"type": "string"},
+                        }
+                    }
+                }
+            },
+            "required": []
+        },
+        theme: 'bootstrap4',
+        disable_properties: true,
+        // array_controls_top: true,
+        disable_edit_json: true,
+      });
+
+      jseditor.on('ready', function() {
+        var button = jseditor.root.getButton('Save Result As File', 'save', 'Save Result As File'),
+        button_holder = jseditor.root.theme.getHeaderButtonHolder();
+        button_holder.appendChild(button);
+        jseditor.root.header.parentNode.insertBefore(button_holder, jseditor.root.header.nextSibling);
+
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            var example = jseditor.getValue(),
+            filename = 'example.json',
+            blob = new Blob([JSON.stringify(example, null, 2)], {
+            type: "application/json;charset=utf-8"
+            });
+
+            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveOrOpenBlob(blob, filename);
+            } else {
+            var a = document.createElement('a');
+            a.download = filename;
+            a.href = URL.createObjectURL(blob);
+            a.dataset.downloadurl = ['text/plain', a.download, a.href].join(':');
+
+            a.dispatchEvent(new MouseEvent('click', {
+                'view': window,
+                'bubbles': true,
+                'cancelable': false
+            }));
+            }
+        }, false);
+        });
+
+    </script>
+  </body>
+</html>
