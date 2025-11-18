@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Basic JSON Editor Example</title>
-    <script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
+    <script src="jsoneditor.js"></script>
     <link rel="stylesheet" id="theme-link" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   </head>
   <body>
@@ -18,7 +18,7 @@
             "type": "object",
             "title": "Rekord",
             "properties": {
-                "Metryczka": {
+                "IDs": {
                     "type": "object",
                     "format": "grid",
                     "options": {"collapsed": true},
@@ -28,7 +28,7 @@
                         "Ludzie Nauki ID":  {"type": "string"},
                     },
                 },
-                "Imię i nazwisko (wszystkie warianty)": {
+                "Bio": {
                     "type": "object",
                     "options": {"collapsed": true},
                     "properties": {
@@ -48,7 +48,32 @@
                                 "title": "nazwisko"
                             }
                         },
+                        "Data urodzenia": {
+                            "type": "string"
+                        },
+                        "Miejsce urodzenia": {
+                            "type": "string"
+                        }
                     }
+                },
+                "Wykształcenie": {
+                    "type": "array",
+                    "options": {"collapsed": true},
+                    "format": "table",
+                    "items": {
+                        "type": "object",
+                        "title": "stopień/tytuł",
+                        "properties": {
+                            "stopień/tytuł": {
+                                "type": "string",
+                                "enum": ['lic.', 'mgr', 'dr', 'dr hab.', 'prof.', 'inne']
+                            },
+                            "uczelnia": {"type": "string"},
+                            "dyscyplina": {"type": "string"},
+                            "rok": {"type": "integer"}
+                        }
+
+                    }                    
                 },
                 "Granty (kierownik)": {
                     "type": "array",
@@ -63,7 +88,6 @@
                                 "enum": [
                                     "NCN",
                                     "NPRH",
-                                    "ERC",
                                     "Horizon/PR",
                                     "Inne polskie",
                                     "Inne zagraniczne",
@@ -76,7 +100,20 @@
                         }
                     }
                 },
-                "Funkcje": {
+                "Zatrudnienie": {
+                    "type": "array",
+                    "format": "table",
+                    "options": {"collapsed": true},
+                    "items": {
+                        "type": "object",
+                        "title": "zatrudnienie",
+                        "properties": {
+                            "uczelnia": {"type": "string"},
+                            "okres": {"type": "string"},
+                        }
+                    }
+                },
+                "Funkcje akademickie": {
                     "type": "array",
                     "format": "table",
                     "options": {"collapsed": true},
@@ -85,9 +122,81 @@
                         "title": "funkcja",
                         "properties": {
                             "Nazwa funkcji": {"type": "string"},
-                            "Uczelnia": {"type": "string"},
+                            "Uczelnia / instytucja": {"type": "string"},
                             "Okres": {"type": "string"},
                         }
+                    }
+                },
+                "Działalność pozaakademicka": {
+                    "type": "array",
+                    "format": "table",
+                    "options": {"collapsed": true},
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "Pole": {
+                                "type": "string",
+                                "enum": ['biznes', 'NGO', 'admin. lokalne', 'admin. centralne', 'admin. międzynarodowe', 'inne'],
+                            },
+                            "Rodzaj": {
+                                "type": "string",
+                                "enum": ["pozycja", "projekt"]
+                            },
+                            "Opis": {"type": "string"}
+                        }
+
+                    }                    
+                },
+                "Wyjazdy zagraniczne": {
+                    "type": "array",
+                    "format": "table",
+                    "options": {"collapsed": true},
+                    "items": {
+                        "type": "object",
+                        "title": "wyjazd",
+                        "properties": {
+                            "kraj": {"type": "string"},
+                            "instytucja": {"type": "string"},
+                            "okres": {"type": "string"}
+                        }
+                    }   
+                },
+                "Obecność w mediach": {
+                    "type": "array",
+                    "format": "table",
+                    "options": {"collapsed": true},
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "tytuł": {"type": "string"},
+                            "link": {"type": "string"}
+                        }
+                    }    
+                },
+                "Nagrody": {
+                    "type": "array",
+                    "format": "table",
+                    "options": {"collapsed": true},
+                    "items": {
+                        "type": "object",
+                        "title": "nagroda",
+                        "properties": {
+                            "nagroda": {"type": "string"},
+                            "typ": {
+                                "type": "string",
+                                "enum": ["uczelniana", "pole naukowe", "inne pola", "odznaczenie"]
+
+                            }
+                        }                    
+                    },
+                },
+                "Źródła": {
+                    "type": "array",
+                    "format": "table",
+                    "options": {"collapsed": true},
+                    "items": {
+                        "title": "źródło",
+                        "type": "string"
                     }
                 }
             },
@@ -97,6 +206,8 @@
         disable_properties: true,
         // array_controls_top: true,
         disable_edit_json: true,
+        disable_array_reorder: true,
+        prompt_before_delete: false
       });
 
       jseditor.on('ready', function() {
